@@ -12,16 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          git fetch --unshallow
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          gh pr list -l autoupdate | cut -f3 | while read line
+          gh pr list -l autoupdate | cut -f1 | while read line
           do
-            git checkout -b $line origin/$line
-            git merge origin/main -m"Merge branch 'main' into $line (automerge)"
-            git push
-            gh workflow run build.yml --ref $line
+            gh pr update-branch $line
           done
-
         env:
           GH_TOKEN: ${{ github.token }}
