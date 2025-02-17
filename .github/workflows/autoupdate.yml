@@ -11,9 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.MY_TOKEN }}
-          repository: andruhon/try-autoupdate-simple
       - run: |
           git fetch --unshallow
           git config user.name github-actions
@@ -24,3 +21,5 @@ jobs:
             git merge origin/main -m"Merge branch 'main' into $line (automerge)"
             git push
           done
+        env:
+          GH_TOKEN: ${{ github.token }}
