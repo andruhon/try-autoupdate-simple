@@ -14,7 +14,7 @@ jobs:
       - run: |
           gh pr list -l autoupdate | cut -f1 | while read line
           do
-            gh pr update-branch branch $line
+            gh pr update-branch $line
           done
         env:
           GH_TOKEN: ${{ github.token }}
