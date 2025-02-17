@@ -33,4 +33,4 @@ jobs:
         uses: shqear93/rerun-checks@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          check-names: 'check1, check2' # Replace with the names of the jobs you want to rerun
+          check-names: 'build'
