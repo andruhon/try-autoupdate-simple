@@ -1,0 +1,22 @@
+name: Build
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4 
+      - run: pwd
+      - run: ls
+      - run: git status
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - run: gh pr status
+        env:
+          GH_TOKEN: ${{ github.token }}
