@@ -20,6 +20,8 @@ jobs:
             git checkout -b $line origin/$line
             git merge origin/main -m"Merge branch 'main' into $line (automerge)"
             git push
+            gh workflow run build.yml --ref $line
           done
+
         env:
           GH_TOKEN: ${{ github.token }}
