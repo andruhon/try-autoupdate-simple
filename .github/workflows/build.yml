@@ -40,7 +40,8 @@ jobs:
                 -H "Accept: application/vnd.github+json" \
                 -H "X-GitHub-Api-Version: 2022-11-28" \
                 /repos/andruhon/try-autoupdate-simple/check-runs/$runid \
-                -f "name=build" -f "status=completed" -f "conclusion=success" -f "details_url=https://github.com/andruhon/try-autoupdate-simple/actions"
+                -f "name=build" -f "status=completed" -f "conclusion=success" -f "details_url=https://github.com/andruhon/try-autoupdate-simple/actions" \
+                -f "output[title]=myoutput" -f "output[summary]=mysummary" -f "output[text]=mytext" 
           }
         env:
           GH_TOKEN: ${{ github.token }}
