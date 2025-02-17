@@ -32,7 +32,8 @@ jobs:
       - run: |
           git rev-parse --abbrev-ref HEAD | {
             read brc
-            runid=$(gh pr checks test5 --json name,link -q 'map(select(.name=="build").link)[0]')
+            runurl=$(gh pr checks test5 --json name,link -q 'map(select(.name=="build").link)[0]')
+            runid=${runurl##*/}
             gh api \
                 --method PATCH \
                 -H "Accept: application/vnd.github+json" \
