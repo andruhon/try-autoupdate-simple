@@ -29,7 +29,7 @@ jobs:
                 /repos/andruhon/try-autoupdate-simple/check-runs \
                 -f "name=build" -f "head_sha=$cmt"
             }
-            gh workflow run build.yml --ref $line -f umtype=auto
+            gh workflow run build.yml --ref $line
           done
         env:
           GH_TOKEN: ${{ github.token }}
