@@ -8,7 +8,7 @@ on:
 jobs:
   autoupdate:
     name: autoupdate
-    runhs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: gh pr list -l autoupdate | cut -f1 | while read line ; gh pr comment $like --body "autoupdate"; done
