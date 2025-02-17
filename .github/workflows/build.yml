@@ -21,3 +21,18 @@ jobs:
       - run: gh pr status
         env:
           GH_TOKEN: ${{ github.token }}
+          
+  complete:
+    name: complete
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          git rev-parse --abbrev-ref HEAD | {
+            read brc
+            gh br checks $brc
+          }
+        env:
+          GH_TOKEN: ${{ github.token }}
