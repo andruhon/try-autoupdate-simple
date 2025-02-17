@@ -12,9 +12,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          gh pr list -l autoupdate | cut -f1 | while read line
+          git fetch --unshallow
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          gh pr list -l autoupdate | cut -f3 | while read line
           do
-            gh pr update-branch $line
+            git checkout -b $line origin/$line
+            git merge origin/main -m"Merge branch 'main' into $line (automerge)"
+            git push
+            git rev-parse HEAD | {
+              read cmt
+              gh api \
+                --method POST \
+                -H "Accept: application/vnd.github+json" \
+                -H "X-GitHub-Api-Version: 2022-11-28" \
+                /repos/andruhon/try-autoupdate-simple/check-runs \
+                -f "name=build" -f "head_sha=$cmt" -f "status=in_progress"
+            }
           done
         env:
           GH_TOKEN: ${{ github.token }}
