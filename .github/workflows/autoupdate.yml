@@ -26,10 +26,9 @@ jobs:
                 --method POST \
                 -H "Accept: application/vnd.github+json" \
                 -H "X-GitHub-Api-Version: 2022-11-28" \
-                /repos/andruhon/try-autoupdate-simple/check-runs \
-                -f "name=build" -f "head_sha=$cmt"
+                /repos/andruhon/try-autoupdate-simple/check-suites \
+                -f "head_sha=$cmt"
             }
-            gh workflow run build.yml --ref $line
           done
         env:
           GH_TOKEN: ${{ github.token }}
